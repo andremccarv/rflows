@@ -36,7 +36,7 @@ trait DotVisualizer[Ctx] extends RoutingDSLBase[Ctx] with SimpleDotVisualizer {
   private def visualizeSplitAggregate(
     in: Split[Any, Any, Any, Group#Tag, Group],
     between: List[Flow[Any, Any]],
-    out: Aggregate[Any, Any]): List[(String, String)] = in.grp flatMap { l =>
+    out: Aggregate[Any, Any]): List[(String, String)] = in.g.registry flatMap { l =>
 
     val decomposed = deCompose(l)
     in.name -> decomposed.head.name :: getEdges(l, Some(in.name)) ::: List(decomposed.last.name -> out.name)
@@ -92,7 +92,7 @@ trait MetricsAggregator {
 
   protected def metrics = _metrics
 
-  protected def edges = _edges
+  def edges = _edges
 
   def put(sn: StatName, an: ActName, propertyName: PropertyName, value: Double): Unit = if ((edges.map(_._1) ++ edges.map(_._2)).contains(an)) {
     _metrics += (sn, an, propertyName) -> value
@@ -101,6 +101,8 @@ trait MetricsAggregator {
   def register(edges: List[(ActName, ActName)]) = {
     _edges ++= edges.toSet
   }
+
+  def metricNames = _metrics.keys.map(_._3)
 
 }
 

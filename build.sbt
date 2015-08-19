@@ -1,5 +1,3 @@
-import org.scoverage.coveralls.Imports.CoverallsKeys._
-
 name := "rflows"
 
 scalaVersion := "2.11.6"
@@ -14,6 +12,8 @@ organization := "com.github.dk14"
 
 libraryDependencies += "io.spray"                     %% "spray-routing-shapeless2" % "1.3.2"
 
+libraryDependencies += "io.spray"                     %% "spray-json"               % "1.3.2"
+
 libraryDependencies += "com.typesafe.akka"            %% "akka-actor"               % "2.3.6"
 
 libraryDependencies += "com.typesafe.akka"            %% "akka-slf4j"               % "2.3.6"
@@ -22,6 +22,7 @@ libraryDependencies += "nl.grons"                     %% "metrics-scala"        
 
 libraryDependencies += "org.scala-lang"               %  "scala-reflect"            % scalaVersion.value
 
-libraryDependencies += "org.scalatest"                %%  "scalatest"           % "3.0.0-M7" % "test"
+libraryDependencies += "org.scalatest"                %% "scalatest"                % "3.0.0-M7" % "test"
 
-coverallsToken := Some("QkzIoJtqyx2rfphcKrL6q6gDFmTtie7M8")
+libraryDependencies += "com.lihaoyi"                  %% "utest"                    % "0.3.1"
+
